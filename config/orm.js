@@ -1,10 +1,4 @@
-//selectAll()
-
-//insertOne()
-
-//updateOne()
-
-var connection = require("./connection.js");
+var connection = require("./connection");
 
 function printQuestionMarks(num) {
   var arr = [];
@@ -36,7 +30,7 @@ function objToSql(ob) {
 }
 
 var orm = {
-  getBurgers: function(tableInput, cb) {
+  all: function(tableInput, cb) {
     var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
       if (err) {
@@ -45,7 +39,7 @@ var orm = {
       cb(result);
     });
   },
-  addBurger: function(table, cols, vals, cb) {
+  create: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
     queryString += " (";
@@ -66,7 +60,7 @@ var orm = {
     });
   },
 
-  editBurger: function(table, objColVals, condition, cb) {
+  update: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 
     queryString += " SET ";
@@ -80,6 +74,19 @@ var orm = {
         throw err;
       }
 
+      cb(result);
+    });
+  },
+
+  delete: function(table, condition, cb) {
+    var queryString = "DELETE FROM " + table;
+    queryString += " WHERE ";
+    queryString += condition;
+
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
       cb(result);
     });
   }

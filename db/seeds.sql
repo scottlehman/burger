@@ -1,4 +1,3 @@
-INSERT INTO burgers_db.burgers ("burger_name", "devoured")
-VALUES ("pizza burger", false),
-("green chilli burger", false),
-("slam burger", false);
+INSERT INTO burgers (name, devoured) VALUES ("pizza burger", false);
+INSERT INTO burgers (name, devoured) VALUES ("green chilli burger", false);
+INSERT INTO burgers (name, devoured) VALUES ("slam burger", false);
